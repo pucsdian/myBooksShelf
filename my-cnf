@@ -1,0 +1,5 @@
+[mysqld]
+bind-address		    	= 172.18.1.1
+max_connections			  = 505
+max_user_connections	= 500
+port                  = 3306

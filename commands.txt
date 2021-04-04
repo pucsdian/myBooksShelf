@@ -1,0 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
+mysql -umybooksshelf -p books
+
+my-secret-password

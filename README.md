@@ -1,2 +1,5 @@
 # My Books Shelf
-An E-Commerce books website
+One place for all books.
+
+MyBooksShelf is an Dockerized Application currently it is under process.
+
