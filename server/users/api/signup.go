@@ -17,6 +17,9 @@ type CreateAccountRequest struct {
 
 // createAccount takes user information and create account for the users
 func (server *Server) createAccount(ctx *gin.Context) {
+	ctx.Writer.Header().Set("Content-type", "application/json; charset=UTF-8")
+	ctx.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+	ctx.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 	var req CreateAccountRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))

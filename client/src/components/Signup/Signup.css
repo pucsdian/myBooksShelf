@@ -1,0 +1,127 @@
+.login {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login  a {
+  color: var(--my-font-color);
+  text-decoration: none;
+}
+
+.login .logo a span {
+  font-size: 50px;
+}
+
+
+
+.login form {
+  border: 2px solid rgba(0,0,1,0.5);
+  padding: 20px;
+}
+
+.login .my-form {
+  width: 40%;
+}
+
+.login form h2 {
+  text-align: center;
+}
+
+.login ul {
+  width: 100%;
+  height: 100%;
+}
+
+.login ul li {
+  list-style: none;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.login ul li h4 {
+  color: red;
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.2);
+  padding: 5px 10px;
+}
+
+.login ul li input, .login ul li button {
+  padding: 10px 20px;
+  font-size: 18px;
+  width: 100%;
+  outline: none;  
+}
+
+.login ul li button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.login .btn {
+  position: relative;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  background: var(--my-font-color);
+  color: rgba(255,255,225,1);
+}
+
+.login .btn #loading {
+  height: 50px;
+  width: 50px;
+}
+
+.login .btn-background-slide {
+  z-index: 1;
+}
+
+.login .btn-background-slide::before {
+  content: '';
+  position: absolute;
+  left:0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  background: var(--primary-color);
+  color: var(--my-font-color);
+  background: radial-gradient(circle, var(--primary-color) 0%, var(--secondary-color) 100%);
+  transform: scaleX(0);
+  transition: transform 300ms;
+}
+
+.login .btn-background-slide:hover::before,
+.login .btn-background-slide:focus::before {
+  transform: scaleX(1);
+}
+
+.login .signup-option a, .login ul li a{
+  color: var(--primary-color);
+  font-size: 18px;
+}
+
+.login ul li p {
+  text-align: center;
+}
+
+.login ul li p a:hover,
+.login .signup-option a:hover {
+  border-bottom: 2px solid var(--my-font-color);
+  transition: border 0.15s ;
+}
+
+@media screen and (max-width: 750px) {
+  .login .my-form {
+    width: 80%;
+  }
+}

@@ -1,0 +1,30 @@
+.errors {
+  padding-top: 100px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  height: 100vh;
+  width: 100%;
+  z-index: 1;
+}
+
+.errors .message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 4px solid rgba(255, 255, 255, 0.5);
+  height: 300px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 15px;
+}
+
+.errors .message h2 {
+  color: red;
+}
+

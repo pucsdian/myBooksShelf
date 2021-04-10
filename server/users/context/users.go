@@ -18,7 +18,7 @@ func (conn *Database) Migrate() {
 // GetUser gives us the user id by specifying username
 func (conn *Database) GetUser(username string) (user Users, err error) {
 
-	if err = conn.DB.Where("username = ?", username).First(&user).Error; err != nil {
+	if err = conn.DB.Where("username = ? or email = ?", username, username).First(&user).Error; err != nil {
 		return user, err
 	}
 	return user, nil

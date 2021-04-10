@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -22,6 +23,10 @@ type loginUserResponse struct {
 
 // loginUser identify user and response with the token and user information
 func (server *Server) loginUser(ctx *gin.Context) {
+	fmt.Println("The loginUser method is invoked...")
+	ctx.Writer.Header().Set("Content-type", "application/json; charset=UTF-8")
+	ctx.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+	ctx.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 	var req loginUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -52,7 +57,6 @@ func (server *Server) loginUser(ctx *gin.Context) {
 		AccessToken: accessToken,
 		User:        user,
 	}
-
 	ctx.JSON(http.StatusOK, rsp)
 
 }

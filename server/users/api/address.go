@@ -89,6 +89,9 @@ type setDefaultAddressReq struct {
 }
 
 func (server *Server) setDefaultAddress(ctx *gin.Context) {
+	ctx.Writer.Header().Set("Content-type", "application/json; charset=UTF-8")
+	ctx.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+	ctx.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 	var req setDefaultAddressReq
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
