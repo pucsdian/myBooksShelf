@@ -1,19 +1,28 @@
 import './Header.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { SearchContext } from '../Context/SearchContext';
+
 
 const Header = () => {
-  const [value, setValue] = useState("")
-  const handleSearch = (e) => {
-    e.preventDefault();
-    console.log(value)
-    setValue("")
-  }
+  const [searchString, setSearchString] = useState("")
+  const { setValue } = useContext(SearchContext)
+
+  var user = JSON.parse(localStorage.getItem("user"))
   const history = useHistory()
-  const token = localStorage.getItem("token")
+
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+    if (searchString !== "") {
+      setValue(searchString)
+      setSearchString("")
+      history.push("/")
+    }
+  }
 
   const handleLogOut = () => {
-    localStorage.clear("token")
+    localStorage.removeItem("user")
     history.push("/login")
   }
 
@@ -31,9 +40,9 @@ const Header = () => {
         <form className="search-form flex" onSubmit={handleSearch}>
           <input
             type="search"
-            value={value}
+            value={searchString}
             placeholder="Search books..."
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => setSearchString(e.target.value)}
           />
           <button type="submit" onClick={handleSearch}>
             <span className="material-icons">
@@ -59,19 +68,22 @@ const Header = () => {
         <span className="material-icons">
           account_circle
           </span>
+
         <label htmlFor="temp">
-          {!token && <ul>
+          {!user && <ul>
             <Link to="/login"><li>Login</li></Link>
             <Link to="/signup"><li>Sign Up</li></Link>
           </ul>}
 
-          {token && <ul>
+          {user && <ul>
             <Link to="/profile"><li>Profile</li></Link>
             <button onClick={handleLogOut}><li>Log Out</li></button>
           </ul>}
         </label>
       </div>
+      {user && user.Username && <div>Welcome <h4>{user.Username}</h4></div>}
     </header>
+
   );
 }
 

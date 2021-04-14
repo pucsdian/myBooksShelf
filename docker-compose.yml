@@ -21,7 +21,7 @@ services:
         ipv4_address: 172.18.1.1
 
 
-#signup service
+#users service
   users:
     container_name: users
     build: ./server/users
@@ -33,6 +33,19 @@ services:
     networks:
       static_ip:
         ipv4_address: 172.18.1.2
+
+#books service
+  books:
+    container_name: books
+    build: ./server/books
+    ports: 
+      - 8081:8081 
+    restart: always
+    depends_on:
+      - db
+    networks:
+      static_ip:
+        ipv4_address: 172.18.1.3        
   
   #frontend service
   frontend:
@@ -43,7 +56,19 @@ services:
     restart: always
     networks:
       static_ip:
-        ipv4_address: 172.18.1.3
+        ipv4_address: 172.18.1.4
+
+# #nginx reverse proxy microservice
+#   proxy:
+#     build: ./proxy
+#     container_name: nginx-proxy
+#     ports:
+#       - "80:80"
+#       - "443:443"
+#     networks:
+#       static_ip:
+#         ipv4_address: 172.18.1.4
+
 
 
 networks:

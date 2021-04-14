@@ -19,18 +19,23 @@ const Login = () => {
       body: JSON.stringify(req),
       header: {
         "Content-type": "application/json; charset=UTF-8",
-        "Access-Control-Allow-Origin": "http://localhost:8080",
+        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
       }
     })
       .then(response => response.json())
       .then((data) => {
         setIsPending(false)
-        if (data.error) {
+        if (data && data.error) {
           setError(data.error)
         }
         else {
-          localStorage.setItem("token", data.access_token)
+          try {
+            localStorage.setItem("user", JSON.stringify(data.user))
+          } catch (e) {
+            console.log(e)
+          }
+
           history.push("/")
         }
 

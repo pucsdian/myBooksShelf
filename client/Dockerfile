@@ -14,7 +14,7 @@ COPY package.json ./
 COPY yarn.lock ./
 COPY ./public ./public
 COPY ./src ./src
-RUN yarn install --
+RUN yarn install
 
 EXPOSE 3000
 

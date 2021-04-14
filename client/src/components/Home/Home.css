@@ -13,3 +13,48 @@
   height: 70px;
   width: 70px;
 }
+
+.home .result-message {
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home .result-message .red{
+  color: red;
+}
+
+.home .result-message .green{
+  color: green;
+}
+
+
+.home .navigation {
+  position: relative;
+}
+
+.home .navigation .prev {
+  position: absolute;
+  left: 10%
+}
+
+.home .navigation .next {
+  position: absolute;
+  right: 10%
+}
+
+.home .navigation button{
+  border: none;
+  padding: 10px;
+  background: var(--secondary-color);
+  color: var(--my-font-color);
+  cursor: pointer;
+  border-radius: 50%;
+  outline: none;
+}
+
+.home .navigation button:hover{
+  background: var(--primary-color);
+  transition: all 0.3s;
+}
