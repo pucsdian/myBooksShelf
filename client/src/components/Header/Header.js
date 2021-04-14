@@ -23,6 +23,7 @@ const Header = () => {
 
   const handleLogOut = () => {
     localStorage.removeItem("user")
+    localStorage.removeItem("cartList")
     history.push("/login")
   }
 

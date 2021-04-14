@@ -4,6 +4,8 @@ import './Books.css'
 
 const Books = ({ books }) => {
   const { cartList, setCartList } = useContext(SearchContext)
+
+
   const addToCart = (bookid, e) => {
     e.target.innerHTML = "Added to Cart"
     e.target.setAttribute("disabled", true)
@@ -11,6 +13,7 @@ const Books = ({ books }) => {
 
     const book = books.filter(book => book.ID === bookid)
     setCartList([...cartList, book[0]])
+
     setTimeout(() => {
       e.target.innerHTML = "Add to Cart"
       e.target.setAttribute("disabled", false)
@@ -18,11 +21,12 @@ const Books = ({ books }) => {
     }, 3000)
 
   }
+
   return (
     <div className="books-list">
       {books.map((book) => {
         return (
-          <div className="book" key={book.Isbn}>
+          <div className="book" key={book.ID}>
             <div className="img-section">
               <img src="" alt={`isbn-${book.Isbn}`} />
             </div>

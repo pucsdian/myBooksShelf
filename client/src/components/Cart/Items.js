@@ -1,16 +1,10 @@
-import { useContext } from 'react';
-import { SearchContext } from '../Context/SearchContext';
 import './Items.css';
 
-const Items = ({ books }) => {
-  const { cartList, setCartList } = useContext(SearchContext)
-  const removeFromCart = (bookid, e) => {
-    const newCartList = cartList.filter((cart) => cart.ID !== bookid)
-    setCartList(newCartList)
-  }
+const Items = ({ cartItems, removeFromCart }) => {
+
   return (
     <div className="cart-list">
-      {books.map((book) => {
+      {cartItems.map((book) => {
         return (
           <div className="book" key={book.Isbn}>
             <div className="img-section">
@@ -43,8 +37,8 @@ const Items = ({ books }) => {
               </div>
             </div>
             <div className="btn">
-              <button onClick={(e) => {
-                removeFromCart(book.ID, e)
+              <button onClick={() => {
+                removeFromCart(book.ID)
               }}> <span className="material-icons">
                   highlight_off
               </span></button>

@@ -9,7 +9,7 @@ const Home = () => {
 
   const { value } = useContext(SearchContext)
 
-  const [books, setBooks] = useState(null);
+  const [books, setBooks] = useState(JSON.parse(localStorage.getItem("books")));
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
   const [initial, setInitial] = useState(false)
@@ -60,8 +60,10 @@ const Home = () => {
 
 
   useEffect(() => {
+    if (value === "") {
+      return
+    }
     setIsPending(true)
-    localStorage.removeItem("books")
     setTotRecords(0)
 
     const req = { "search_string": value }

@@ -4,14 +4,24 @@ import Items from './Items'
 import './Cart.css';
 
 const Cart = () => {
-  const { cartList } = useContext(SearchContext)
+  const { cartList, setCartList } = useContext(SearchContext)
   const [totAmount, setTotAmount] = useState(0)
+
+  const removeFromCart = (bookid) => {
+    const newCartList = cartList.filter((cart) => cart.ID !== bookid)
+    setCartList(newCartList)
+  }
+
   useEffect(() => {
-    setTotAmount(0)
+    localStorage.setItem("cartList", JSON.stringify(cartList))
+    let amount = 0
     cartList.map((book) => (
-      setTotAmount(totAmount => totAmount + book.Price)
+      amount += book.Price
     ))
+    setTotAmount(amount)
   }, [cartList])
+
+
   return (
     <div className="cart">
       <div className="cart-header flex">
@@ -26,7 +36,7 @@ const Cart = () => {
         </div>
       </div>
 
-      {cartList && <Items books={cartList} />}
+      {cartList && <Items cartItems={cartList} removeFromCart={removeFromCart} />}
 
     </div>
   );

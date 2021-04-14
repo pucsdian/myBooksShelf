@@ -19,8 +19,10 @@ function App() {
           <div className="content">
             <Switch>
               <Route exact path="/">
+
                 <Header />
                 <Home />
+
               </Route>
               <Route path="/cart">
                 <Header />
@@ -32,8 +34,8 @@ function App() {
             </Switch>
           </div>
         </div>
-      </SearchContextProvider>
 
+      </SearchContextProvider>
     </Router>
   );
 }
