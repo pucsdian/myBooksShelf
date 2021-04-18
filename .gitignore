@@ -1,5 +1,7 @@
 Diagrams/
 data/
+*.log
+TODO
 
 # front-end
 *node_modules

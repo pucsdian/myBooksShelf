@@ -20,7 +20,11 @@ const (
 // authMiddleware is an middleware for user authentication
 func authMiddleware(tokenMaker token.Maker) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
+		ctx.Request.Header.Set("Access-Control-Expose-Headers", "Authorization")
+		ctx.Request.Header.Set("Access-Control-Allow-Credentials", "true")
+
 		authorizationHeader := ctx.GetHeader(authorizationHeaderKey)
+		fmt.Println("Authorization: ", ctx.GetHeader("Authorization"))
 		if len(authorizationHeader) == 0 {
 			err := errors.New("authorization header is not provided")
 			ctx.AbortWithStatusJSON(http.StatusUnauthorized, errorResponse(err))
@@ -47,5 +51,6 @@ func authMiddleware(tokenMaker token.Maker) gin.HandlerFunc {
 		}
 		ctx.Set(authorizationPayloadKey, payload)
 		ctx.Next()
+
 	}
 }

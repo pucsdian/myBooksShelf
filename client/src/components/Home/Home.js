@@ -60,6 +60,9 @@ const Home = () => {
 
 
   useEffect(() => {
+    setBooks({ search_result: [], total_records: 0 })
+    setNext(0)
+
     if (value === "") {
       return
     }
@@ -84,11 +87,12 @@ const Home = () => {
         }
         else {
           setBooks(data)
+          setInitial(false)
+          setError(null)
           localStorage.setItem("books", JSON.stringify(data))
           if (data && data.total_records) {
             setTotRecords(data.total_records)
           }
-          setInitial(false)
         }
 
       }).catch(err => {
@@ -138,8 +142,8 @@ const Home = () => {
     <div className="home">
       {error && <Error error={error} />}
       {isPending && <div className="pending"><Loader /></div>}
-      {books && books.search_result.length === 0 && <div className="result-message"><h3>Sorry, record not found for <span className="red">'{value}'</span>, please search something else..</h3></div>}
-      {!initial && books && books.search_result.length !== 0 && <div className="result-message"><h3>Showing results for <span className="green">'{value}'</span>, total {books.total_records} records found</h3></div>}
+      {!isPending && books && books.search_result.length === 0 && <div className="result-message"><h3>Sorry, record not found for <span className="red">'{value}'</span>, please search something else..</h3></div>}
+      {!isPending && !initial && books && books.search_result.length !== 0 && <div className="result-message"><h3>Showing results for <span className="green">'{value}'</span>, total {books.total_records} records found</h3></div>}
       <div className="navigation">
         {next >= 1 && <div className="prev"><button onClick={handleDesc}><span className="material-icons">
           arrow_back

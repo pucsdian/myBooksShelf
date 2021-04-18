@@ -31,7 +31,8 @@ const Login = () => {
         }
         else {
           try {
-            localStorage.setItem("user", JSON.stringify(data.user))
+            console.log(data)
+            localStorage.setItem("user", JSON.stringify(data))
           } catch (e) {
             console.log(e)
           }

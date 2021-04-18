@@ -56,7 +56,12 @@ func (server *Server) setupRouter() {
 	router.POST("/api/books", server.getDefaultBooks)
 	router.GET("/api/randombooks", server.getRandomBooks)
 	router.POST("/api/booksbyoffset", server.getBooksByOffset)
-	// authRoutes := router.Group("/").Use(authMiddleware(server.tokenMaker))
+	router.OPTIONS("/api/addtocart", server.preFlight)
+
+	authRoutes := router.Group("/").Use(authMiddleware(server.tokenMaker))
+
+	authRoutes.POST("/api/addtocart", server.addToCart)
+	authRoutes.GET("/api/addtocart", server.getCartItems)
 
 	server.router = router
 }

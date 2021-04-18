@@ -1,10 +1,12 @@
 package context
 
-import "github.com/shubhamjagdhane/myBooksShelf/server/books/util"
+import (
+	"github.com/shubhamjagdhane/myBooksShelf/server/books/util"
+)
 
 // Migrate creates the schema of the tables
 func (conn *Database) Migrate() {
-	conn.DB.AutoMigrate(&Books{})
+	conn.DB.AutoMigrate(&Books{}, &UserCart{})
 }
 
 // GetUser gives us the user id by specifying username
@@ -44,5 +46,47 @@ func (conn *Database) GetRandomBooks() (books []Books, err error) {
 	if err := conn.DB.Limit(limit).Offset(offset).Find(&books).Error; err != nil {
 		return books, err
 	}
+	return books, nil
+}
+
+func (conn *Database) AddToCart(bookIDs []int, username string) (err error) {
+
+	user := Users{}
+	if err = conn.DB.Where("username = ?", username).First(&user).Error; err != nil {
+		return err
+	}
+
+	if err := conn.DB.Where("user_id = ?", user.ID).Delete(&UserCart{}).Error; err != nil {
+		return err
+	}
+
+	for _, bookId := range bookIDs {
+		if err := conn.DB.Create(&UserCart{BookID: uint64(bookId), UserID: user.ID}).Error; err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (conn *Database) GetCartItems(username string) (books []Books, err error) {
+	user := Users{}
+	if err = conn.DB.Where("username = ?", username).First(&user).Error; err != nil {
+		return books, err
+	}
+
+	var userCartID []UserCart
+	if err := conn.DB.Where("user_id = ?", user.ID).Find(&userCartID).Error; err != nil {
+		return books, err
+	}
+
+	for _, item := range userCartID {
+		book := Books{}
+		if err := conn.DB.Where("id = ?", item.BookID).First(&book).Error; err != nil {
+			return books, err
+		}
+		books = append(books, book)
+	}
+
 	return books, nil
 }

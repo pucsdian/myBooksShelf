@@ -17,6 +17,12 @@ type Database struct {
 // Books is represent books table
 type Books models.Books
 
+// UserCart is represent cart table for the user
+type UserCart models.UserCarts
+
+// User is represent the user table
+type Users models.Users
+
 // InitDB gives use database object by specfiying the configuration
 func InitDB(dbUser, dbPassword, dbName, host, port string) *Database {
 

@@ -4,7 +4,10 @@ export const SearchContext = createContext()
 
 const SearchContextProvider = (props) => {
   const [value, setValue] = useState("")
-  const [cartList, setCartList] = useState(JSON.parse(localStorage.getItem("cartList")))
+  const cartStorage = JSON.parse(localStorage.getItem("cartList"))
+  const [cartList, setCartList] = useState(cartStorage ? cartStorage : [])
+
+
   return (
     <SearchContext.Provider value={{ value, setValue, cartList, setCartList }}>
       {props.children}
