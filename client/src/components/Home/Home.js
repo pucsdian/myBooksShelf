@@ -25,7 +25,7 @@ const Home = () => {
       signal: abortCont.signal,
       header: {
         "Content-type": "application/json; charset=UTF-8",
-        "Access-Control-Allow-Origin": "http://localhost:8080",
+        "Access-Control-Allow-Origin": "https://localhost:8080",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
       }
     })

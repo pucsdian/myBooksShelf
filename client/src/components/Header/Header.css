@@ -66,6 +66,22 @@ header .profile {
   height: 40px;
 }
 
+header .cart-logo {
+  position: relative;
+}
+header .cart-logo .tot-items {
+  position: absolute;
+  display: inline-block;
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  top: -20%;
+  left: 60%;
+}
+
+
 header .cart-logo span,
 header .profile span {
   font-size: 30px;

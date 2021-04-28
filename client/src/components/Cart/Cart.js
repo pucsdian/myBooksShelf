@@ -96,7 +96,12 @@ const Cart = () => {
           <h2>You Cart Details</h2>
         </div>
         <div className="amount">
-          <div className="heading">Total Amount: Rs.<span>{totAmount}</span></div>
+          
+          <ul>
+            <li><div className="tot-items">Total Items: {cartList.length}</div></li>
+            <li><div className="heading">Total Amount: Rs.<span>{totAmount}</span></div></li>
+          </ul>
+          
           <div className="proceed">
             <button>Proceed To Checkout</button>
           </div>
@@ -105,8 +110,9 @@ const Cart = () => {
 
       {error && <Error error={error} />}
       {isPending && <div className="pending"><Loader /></div>}
+      {cartList.length==0 && <div className="empty-cart"> Your cart is empty</div>}
+
       {cartList && <Items cartItems={cartList} removeFromCart={removeFromCart} />}
-      {!cartList && <div className="empty-cart"> Your cart is empty</div>}
 
     </div>
   );

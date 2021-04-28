@@ -108,7 +108,10 @@ const Header = () => {
         <Link to="/cart">
           <span className="material-icons">
             shopping_cart
-           </span>
+          </span>
+          <div className="tot-items">
+           {cartList.length}
+          </div>
         </Link>
       </div>
 

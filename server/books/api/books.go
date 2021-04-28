@@ -176,7 +176,7 @@ func (server *Server) getCartItems(ctx *gin.Context) {
 func (server *Server) preFlight(ctx *gin.Context) {
 	ctx.Writer.Header().Set("Access-Control-Allow-Headers", "Authorization")
 	ctx.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST")
-	ctx.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:8081")
+	ctx.Writer.Header().Set("Access-Control-Allow-Origin", "https://localhost:8081")
 	fmt.Println("Authorization using preFlight: ", ctx.GetHeader("Authorization"))
 	ctx.JSON(http.StatusOK, gin.H{"message": "success"})
 }

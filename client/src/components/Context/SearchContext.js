@@ -7,9 +7,13 @@ const SearchContextProvider = (props) => {
   const cartStorage = JSON.parse(localStorage.getItem("cartList"))
   const [cartList, setCartList] = useState(cartStorage ? cartStorage : [])
 
+  const buyStorage = JSON.parse(localStorage.getItem("buyList"))
+  const [buyList, setBuyList] = useState(buyStorage ? buyStorage : [])
+
+
 
   return (
-    <SearchContext.Provider value={{ value, setValue, cartList, setCartList }}>
+    <SearchContext.Provider value={{ value, setValue, cartList, setCartList, buyList, setBuyList }}>
       {props.children}
     </SearchContext.Provider>
   );
